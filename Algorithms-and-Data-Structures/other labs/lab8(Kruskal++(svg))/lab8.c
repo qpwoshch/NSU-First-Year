@@ -218,7 +218,7 @@ void svg(int vertex, edge_data* arr, int* frame, int pos, int edge) {
 int main(int argc, char** argv) {
     if (argc > 1 && strcmp(argv[1], "-g") == 0) {
         setlocale(LC_ALL, "Ru");
-        printf("Введите количество вершин и ребер\n");
+        printf("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІРµСЂС€РёРЅ Рё СЂРµР±РµСЂ\n");
         int vertex, edge;
         if (scanf("%d", &vertex) != 1) {
             return -1;
@@ -247,7 +247,7 @@ int main(int argc, char** argv) {
             free(arr);
             return -1;
         }
-        printf("Введите данные ребер(начало, конец и длинну)\n");
+        printf("Р’РІРµРґРёС‚Рµ РґР°РЅРЅС‹Рµ СЂРµР±РµСЂ(РЅР°С‡Р°Р»Рѕ, РєРѕРЅРµС† Рё РґР»РёРЅРЅСѓ)\n");
         for (int i = 0; i < edge; i++) {
             int start, end, length;
             unsigned long long int tryLength;
@@ -301,7 +301,7 @@ int main(int argc, char** argv) {
             printf("no spanning tree");
         }
         else {
-            printf("Должны быть выделены следующие ребра:\n");
+            printf("Р”РѕР»Р¶РЅС‹ Р±С‹С‚СЊ РІС‹РґРµР»РµРЅС‹ СЃР»РµРґСѓСЋС‰РёРµ СЂРµР±СЂР°:\n");
             for (int i = 0; i < pos; i++) {
                 printf("%d %d\n", arr[frame[i]].start + 1, arr[frame[i]].end + 1);
             }
