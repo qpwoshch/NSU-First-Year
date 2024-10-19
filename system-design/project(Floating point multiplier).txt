@@ -1,0 +1,50 @@
+module fp16_multiplier (
+    input logic [15:0] a,
+    input logic [15:0] b,
+    input logic clk,
+    input logic reset,
+    output logic [15:0] resultna
+);
+    logic sign_a, sign_b, sign_result;
+    logic [4:0] exp_a, exp_b;
+    logic [5:0] exp_result;
+    logic [10:0] norm_mant_a, norm_mant_b;
+    logic [21:0] mant_product;
+    logic [9:0] a_mantisa, b_mantisa, final_mantisa;
+    logic [4:0] help = 5'd15;
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            result <= 16'b0;
+        end else begin
+            sign_a = a[15];
+            sign_b = b[15];
+            exp_a = a[14:10];
+            exp_b = b[14:10];
+            a_mantisa = a[9:0];
+            b_mantisa = b[9:0];
+            if (((exp_a == 5'b11111) && (a_mantisa  == 10'b0000000000)) || ((exp_b == 5'b11111) && (b_mantisa  == 10'b0000000000))) begin
+                result <= 16'b0111110000000000;
+            end else if (((exp_a == 5'b00000) && (a_mantisa  == 10'b0000000000)) || ((exp_b == 5'b00000) && (b_mantisa == 10'b0000000000))) begin
+                result  <= 16'b0000000000000000;
+            end else if (((exp_a  == 5'b11111) && (a_mantisa  != 10'b0000000000)) || ((exp_b == 5'b11111) && (b_mantisa  != 10'b0000000000))) begin
+                result <= 16'b0111110000000001;
+            end else begin
+                sign_result = sign_a ^ sign_b;
+                exp_result  = exp_a + exp_b - help;
+                norm_mant_a  = {1'b1, a_mantisa }; 
+                norm_mant_b  = {1'b1, b_mantisa };
+                mant_product = norm_mant_a  * norm_mant_b;
+                if (mant_product[21]) begin
+                    mant_product  = mant_product >> 1;
+                    exp_result = exp_result + 1;
+                end 
+                final_mantisa = mant_product[19:10];
+                if (exp_result >=  5'b11111) begin
+                    result <= 16'b0111110000000000;
+                end else begin
+                    result <= {sign_result, exp_result[4:0], final_mantisa};
+                end
+           end
+        end
+    end
+endmodule

@@ -1,0 +1,59 @@
+//четный тест выводит тот же ответ, что и нечетный, остальное работает правильно
+module tb_fp16_multiplier;
+
+    // Параметры тестбенча
+    localparam CLOCK_PERIOD = 10;
+    // Входы и выходы
+    logic [15:0] a, b;
+    logic clk, reset;
+    logic [15:0] result;
+    fp16_multiplier uut (
+        .a(a),
+        .b(b),
+        .clk(clk),
+        .reset(reset),
+        .result(result)
+    );
+
+    always #CLOCK_PERIOD clk = ~clk;
+
+    initial begin
+        clk = 0;
+        reset = 1;
+        #10;
+        reset = 0;
+        a = 16'b0011110000000000; // 1.0
+        b = 16'b0100000000000000; // 2.0 
+        #10;
+        $display("Input A: %b, Input B: %b, Result: %b", a, b, result);
+
+        a = 16'b1100000000000000; // -2.0
+        b = 16'b1011110000000000; // -1.0
+        #10;
+        $display("Input A: %b, Input B: %b, Result: %b", a, b, result);
+
+        a = 16'b1100000000000000; // -2.0 
+        b = 16'b0100000000000000; // 2.0 
+        #10;
+        $display("Input A: %b, Input B: %b, Result: %b", a, b, result);
+        a = 16'b0011110000000000; // 1
+        b = 16'b1100010000000000; // -4
+        #10;
+        $display("Input A: %b, Input B: %b, Result: %b", a, b, result);
+        a = 16'b0100001100000000; // 3.5
+        b = 16'b1011111000000000; // -1.5
+        #10;
+        $display("Input A: %b, Input B: %b, Result: %b", a, b, result);
+        a  = 16'b1011111000000000; // -1.5
+        b  = 16'b0100001100000000; // 3.5
+        #10;
+        $display("Input A: %b, Input B: %b, Result: %b", a, b, result);
+        a = 16'b0111110000000000; // бесконечность
+        b  = 16'b0100001100000000; // 3.5
+        #10;
+        $display("Input A: %b, Input B: %b, Result: %b", a, b, result);
+        #10;
+        $finish;
+    end
+
+endmodule
