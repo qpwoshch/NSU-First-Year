@@ -197,7 +197,7 @@ void dijkstra(int start, int end, int vertices, int** matrix, int key) {
         fprintf(file, "<head>\n<style>\ntable {\n}.custom-color {\nbackground-color: red;\n}\n</style>\n</head>\n<body>\n");
         int number = 0;
         int second = 1;
-        fprintf(file, "<h1>матрица связей</h1>\n<table border = \"5\" width=\"400\" height=\"480\">\n");
+        fprintf(file, "<h1>РјР°С‚СЂРёС†Р° СЃРІСЏР·РµР№</h1>\n<table border = \"5\" width=\"400\" height=\"480\">\n");
         for (int i = 0; i < vertices; i++) {
             fprintf(file, "<tr>\n");
             for (int j = 0; j < vertices; j++) {
@@ -225,7 +225,7 @@ void dijkstra(int start, int end, int vertices, int** matrix, int key) {
             fprintf(file, "</tr>\n");
         }
         fprintf(file, "</table>\n");
-        fprintf(file, "<h1>минимальный путь</h1>\n<table border=\"5\" width=\"400\" height=\"120\">\n<tr>\n");
+        fprintf(file, "<h1>РјРёРЅРёРјР°Р»СЊРЅС‹Р№ РїСѓС‚СЊ</h1>\n<table border=\"5\" width=\"400\" height=\"120\">\n<tr>\n");
         for (int i = 0; i < vertices; i++) {
             fprintf(file, "<td ALIGN=center>");
             long long int number1 = min_values[i];
@@ -257,17 +257,17 @@ int main(int argc, char** argv) {
         key = 1;
         setlocale(LC_ALL, "Rus");
         int vertices_in_the_graph, start, end, numberOfRibs;
-        printf("Введите число вершин в графе:\n");
+        printf("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РІРµСЂС€РёРЅ РІ РіСЂР°С„Рµ:\n");
         if (scanf("%d", &vertices_in_the_graph) != 1) {
             
             return -1;
         }
-        printf("Введите начало и конец пути:\n");
+        printf("Р’РІРµРґРёС‚Рµ РЅР°С‡Р°Р»Рѕ Рё РєРѕРЅРµС† РїСѓС‚Рё:\n");
         if (scanf("%d%d", &start, &end) != 2) {
             
             return -1;
         }
-        printf("Введите число ребер в графе:\n");
+        printf("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ СЂРµР±РµСЂ РІ РіСЂР°С„Рµ:\n");
         if (scanf("%d", &numberOfRibs) != 1) {
             
             return -1;
@@ -325,7 +325,7 @@ int main(int argc, char** argv) {
             }
         }
 
-        printf("Введите данные графа(начало, конец и длинны ребер):\n");
+        printf("Р’РІРµРґРёС‚Рµ РґР°РЅРЅС‹Рµ РіСЂР°С„Р°(РЅР°С‡Р°Р»Рѕ, РєРѕРЅРµС† Рё РґР»РёРЅРЅС‹ СЂРµР±РµСЂ):\n");
         for (int i = 0; i < numberOfRibs; i++) {
             int startRibs, endRibs;
             int lengthRibs;
