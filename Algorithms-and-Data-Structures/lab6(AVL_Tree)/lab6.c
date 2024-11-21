@@ -118,7 +118,7 @@ void printfree(node* root) {
 int main(int argc, char** argv) {
     if (argc > 1 && strcmp(argv[1], "-t") == 0) {
         setlocale(LC_ALL, "Rus");
-        printf("Введите количество вершин\n");
+        printf("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІРµСЂС€РёРЅ\n");
         int vertices;
         if (scanf("%d", &vertices) != 1) {
             return 0;
@@ -136,7 +136,7 @@ int main(int argc, char** argv) {
             return -1;
         }
         int number;
-        printf("Введите числа для добавления в АВЛ дерево\n");
+        printf("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Р° РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ РІ РђР’Р› РґРµСЂРµРІРѕ\n");
         if (scanf("%d", &number) != 1) {
             free(root);
             return -1;
@@ -153,9 +153,9 @@ int main(int argc, char** argv) {
             head = insert(head, &root[i], number);
         }
         int size = tree_size(head);
-        printf("Размер дерева:\n");
+        printf("Р Р°Р·РјРµСЂ РґРµСЂРµРІР°:\n");
         printf("%d\n", size);
-        printf("само дерево:\n");
+        printf("СЃР°РјРѕ РґРµСЂРµРІРѕ:\n");
         printfree(head);
         free(root);
         return 0;
